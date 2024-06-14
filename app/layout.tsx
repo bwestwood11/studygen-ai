@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/Navbar";
+import SmoothScrolling from "@/components/providers/smooth-scroll";
+import dynamic from "next/dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,8 +26,10 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
+          <SmoothScrolling>
+            <Navbar />
+            {children}
+          </SmoothScrolling>
         </ThemeProvider>
       </body>
     </html>

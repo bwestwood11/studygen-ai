@@ -21,7 +21,6 @@ export default auth(async (req) => {
   if (isApiAuthRoute) {
     return;
   }
-  console.log({isLoggedIn, auth:req.auth})
 
   if (isAuthRoute) {
     if (isLoggedIn) {

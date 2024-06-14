@@ -31,7 +31,7 @@ export default async function Navbar() {
   const session = await getCurrentUser();
   return (
     <header className="flex h-16 w-full items-center justify-between px-4 md:px-6 lg:px-8">
-      <Link href="#" className="flex items-center" prefetch={false}>
+      <Link href="/" className="flex items-center" prefetch={false}>
         <span className="sr-only">StudyGen AI</span>
         <LogoIcon className="size-52" />
       </Link>
