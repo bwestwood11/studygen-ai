@@ -30,7 +30,7 @@ const Links = [
 export default async function Navbar() {
   const session = await getCurrentUser();
   return (
-    <header className="flex h-16 w-full items-center justify-between px-4 md:px-6 lg:px-8">
+    <header className="flex h-16 w-full max-w-[1300px] mx-auto items-center justify-between px-4 md:px-6 lg:px-8">
       <Link href="/" className="flex items-center" prefetch={false}>
         <span className="sr-only">StudyGen AI</span>
         <LogoIcon className="size-52" />
@@ -40,7 +40,7 @@ export default async function Navbar() {
           <Link
             key={link.name + index}
             href={link.href}
-            className="text-sm font-medium transition-colors hover:text-primary focus:text-primary py-1   underline-animated"
+            className="text-sm font-medium transition-colors hover:text-primary focus:text-primary py-1 underline-animated"
             prefetch={false}
           >
             {link.name}

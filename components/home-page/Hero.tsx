@@ -5,7 +5,7 @@ import SparklesText from "../magicui/sparkles-text";
 
 export default function Hero() {
   return (
-    <section className="w-full py-16 md:py-24 lg:py-32">
+    <section className="max-w-screen-xl mx-auto py-16 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
         <div className="mx-auto flex max-w-3xl flex-col items-center justify-center space-y-6 text-center">
           <Image
