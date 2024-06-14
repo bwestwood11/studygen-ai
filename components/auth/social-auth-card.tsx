@@ -16,7 +16,7 @@ import { signIn } from "next-auth/react";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { FormEvent } from "react";
 
-const CardComponent = () => {
+const SocialAuthCard = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
 
@@ -61,4 +61,4 @@ const CardComponent = () => {
   );
 };
 
-export default CardComponent;
+export default SocialAuthCard;

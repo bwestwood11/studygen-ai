@@ -14,13 +14,13 @@ import { signOut } from "next-auth/react";
 import { Heart, Library, LogOut, Upload } from "lucide-react";
 
 const UserButton = ({
-  username,
+  username = "User",
   profileImage,
-  userEmail,
+  userEmail = "example@gmail.com",
 }: {
-  username: string;
-  profileImage: string;
-  userEmail: string;
+  username?: string;
+  profileImage?: string;
+  userEmail?: string;
 }) => {
   return (
     <DropdownMenu>
@@ -31,8 +31,8 @@ const UserButton = ({
           width={40}
           height={40}
           size="size-10"
-          src={profileImage}
-          className=" size-10"
+          ProfileSrc={profileImage}
+          className=" size-10 "
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
