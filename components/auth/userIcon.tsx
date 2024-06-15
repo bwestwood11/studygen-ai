@@ -11,7 +11,7 @@ import {
 import { UserAvatar } from "@/components/ui/avatar";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import { Heart, Library, LogOut, Upload } from "lucide-react";
+import { Heart, LayoutDashboard, Library, LogOut, Upload } from "lucide-react";
 
 const UserButton = ({
   username = "User",
@@ -35,17 +35,21 @@ const UserButton = ({
           className=" size-10 "
         />
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent
+        sideOffset={8}
+        collisionPadding={20}
+        className="px-2"
+      >
         <DropdownMenuLabel>{username}</DropdownMenuLabel>
         <p className="px-2 text-xs">{userEmail}</p>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Link
-            href={"/liked"}
+            href={"/dashboard"}
             className="w-full h-full flex items-center gap-2"
           >
-            <Heart size={15} />
-            Liked
+            <LayoutDashboard size={15} />
+            Dashboard
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>

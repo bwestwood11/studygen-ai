@@ -3,7 +3,7 @@ import React from "react";
 
 const Page = () => {
   return (
-    <div className="flex justify-center items-center w-full h-svh">
+    <div className="flex justify-center items-center w-full h-svh max-sm:px-2">
       <AuthErrorCard />
     </div>
   );
