@@ -29,7 +29,11 @@ export default function Hero() {
             </p>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row w-full sm:w-fit">
-            <Link href="#" className={buttonVariants()} prefetch={false}>
+            <Link
+              href="/auth/login"
+              className={buttonVariants()}
+              prefetch={false}
+            >
               Get Started Free
             </Link>
             <Link
