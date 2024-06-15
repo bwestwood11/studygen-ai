@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/Navbar";
 import SmoothScrolling from "@/components/providers/smooth-scroll";
-import dynamic from "next/dynamic";
+import ModalProvider from "@/components/modal/modal-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +26,7 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
+          <ModalProvider />
           <SmoothScrolling>
             <Navbar />
             {children}
