@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
-import { MenuIcon, MountainIcon } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import Image from "next/image";
-import LogoIcon from "./icons/logo-icon";
-import { ModeToggle } from "./ui/toggle-theme";
-import { getCurrentUser } from "@/actions/auth.action";
-import UserButton from "./auth/userIcon";
+import LogoIcon from "@/components/icons/logo-icon";
+import { ModeToggle } from "@/components/ui/toggle-theme";
+import UserNavbar from "@/components/layout/user-navbar";
 
 const Links = [
   {
@@ -28,9 +27,8 @@ const Links = [
 ];
 
 export default async function Navbar() {
-  const session = await getCurrentUser();
   return (
-    <header className="flex h-16 w-full max-w-[1300px] mx-auto items-center justify-between px-4 md:px-6 lg:px-8">
+    <header className="flex h-nav w-full max-w-[1300px] mx-auto items-center justify-between px-4 md:px-6 lg:px-8">
       <Link href="/" className="flex items-center" prefetch={false}>
         <span className="sr-only">StudyGen AI</span>
         <LogoIcon className="size-52" />
@@ -51,15 +49,7 @@ export default async function Navbar() {
       <div className="hidden lg:flex gap-6">
         <ModeToggle />
 
-        {!session ? (
-          <Button>Get Started</Button>
-        ) : (
-          <UserButton
-            profileImage={session.image || undefined}
-            userEmail={session.email || undefined}
-            username={session.name || undefined}
-          />
-        )}
+       <UserNavbar />
       </div>
 
       {/* Mobile Navbar */}

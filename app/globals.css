@@ -23,7 +23,9 @@
     --destructive: 0 100% 50%;
     --destructive-foreground: 21 96% 87%;
     --ring: 45 98% 63%;
+
     --radius: 0.5rem;
+    --nav-height: 4rem;
   }
 
   .dark {
@@ -77,4 +79,26 @@
   .underline-animated:hover::after {
     transform: scaleX(1);
   }
+
+  .h-nav {
+    @apply h-[var(--nav-height)];
+  }
+
+  .h-fullscreen {
+    @apply h-[calc(100svh-var(--nav-height))];
+  }
 }
+
+ .loader {
+    width: 10px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: l5 1s infinite linear alternate;
+  }
+  @keyframes l5 {
+      0%  {box-shadow: 20px 0 #ffffff, -20px 0 #d1d0d022;background: #ffffff }
+      33% {box-shadow: 20px 0 #ffffff, -20px 0 #d1d0d022;background: #d1d0d022}
+      66% {box-shadow: 20px 0 #d1d0d022,-20px 0 #ffffff; background: #d1d0d022}
+      100%{box-shadow: 20px 0 #ffffff,-20px 0 #ffffff; background: #ffffff }
+  }
+
