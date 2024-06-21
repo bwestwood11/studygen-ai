@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import SmoothScrolling from "@/components/providers/smooth-scroll";
 import ModalProvider from "@/components/modal/modal-provider";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <SessionProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -32,6 +34,7 @@ export default function RootLayout({
             {children}
           </SmoothScrolling>
         </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

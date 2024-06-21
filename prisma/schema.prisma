@@ -8,26 +8,26 @@ datasource db {
 }
 
 model User {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  name  String?
-  email String  @unique
-  image String?
-  credits Float @default(500)
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  name    String?
+  email   String  @unique
+  image   String?
+  credits Float   @default(500)
 
   emailVerified DateTime?
   accounts      Account[]
   purchases     PurchaseHistory[]
+  createdAt     DateTime          @default(now())
 }
 
 model PurchaseHistory {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String  @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @unique @db.ObjectId
   price     Float
   quantity  Int
   createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Restrict)
-
 }
 
 model Account {
