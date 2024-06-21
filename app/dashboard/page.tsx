@@ -11,7 +11,7 @@ const DashboardPage = () => {
   console.log(session)
 
   return (
-    <div className="max-w-2xl mx-auto flex items-center justify-center">
+    <div className="max-w-2xl mx-auto flex flex-col items-center justify-center">
        <Button onClick={()=>openModal()}>Purchase Credits</Button>
     </div>
   );

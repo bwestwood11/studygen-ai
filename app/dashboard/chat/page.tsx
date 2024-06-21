@@ -73,7 +73,7 @@ const ChatPage = () => {
   };
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} className="flex flex-col h-fullscreen w-full max-w-2xl mx-auto bg-background text-foreground">
+    <form ref={formRef} onSubmit={onSubmit} className="flex flex-col h-fullscreen w-full   bg-background text-foreground">
       <header className="flex items-center gap-3 px-4 py-3 border-b">
         <Avatar className="w-8 h-8 border ">
           <AvatarFallback className="bg-primary text-primary-foreground">SB</AvatarFallback>

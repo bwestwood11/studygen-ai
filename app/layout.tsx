@@ -30,7 +30,6 @@ export default function RootLayout({
         >
           <ModalProvider />
           <SmoothScrolling>
-            <Navbar />
             {children}
           </SmoothScrolling>
         </ThemeProvider>

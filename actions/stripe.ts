@@ -4,8 +4,8 @@ import { getCurrentUser } from "./auth.action";
 import { stripe } from "@/lib/stripe";
 
 export async function stripeCheckout(creditsRequired: number) {
+  const user = await getCurrentUser();
   try {
-    const user = await getCurrentUser();
     console.log("user", user);
     if (!user || !user.email) {
       return {
@@ -34,7 +34,6 @@ export async function stripeCheckout(creditsRequired: number) {
           price: process.env.STRIPE_PRICE_ID!,
           quantity: creditsRequired,
         },
-   
       ],
     });
     console.log("stripe session url", stripeSession.url);

@@ -1,10 +1,10 @@
-import "server-only"
+import "server-only";
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/prisma";
 
 export async function getPurchaseHistory() {
+  const session = await auth();
   try {
-    const session = await auth();
     if (!session || !session.user || !session.user.id) return null;
 
     const purchaseHistory = await prisma.user.findFirst({
@@ -12,8 +12,8 @@ export async function getPurchaseHistory() {
         id: session?.user?.id,
       },
       select: {
-        purchases: true
-      }
+        purchases: true,
+      },
     });
 
     return purchaseHistory?.purchases || null;
