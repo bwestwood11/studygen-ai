@@ -6,6 +6,7 @@ import { ZSAError } from "zsa";
 import { CREDITS_REQUIREMENT } from "@/lib/config";
 import { genAI } from "@/lib/gemini";
 import { HistoryParser } from "@/lib/utils";
+import { revalidatePath } from "next/cache";
 
 export const GenerateContentAction = authenticatedProcedure.createServerAction().input(z.object({
     question:z.string(),
@@ -69,6 +70,6 @@ export const GenerateContentAction = authenticatedProcedure.createServerAction()
         }
     })
     
-
+    revalidatePath('/dashboard/chat')
     return text
 })

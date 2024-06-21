@@ -1,8 +1,19 @@
-import NextAuth, { DefaultSession } from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
 import authConfig from "@/auth.config";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./prisma/prisma";
 import { getUserById } from "./lib/user";
+
+
+export type ExtendedUser = DefaultSession["user"] & {
+  credits:number
+};
+
+declare module "next-auth" {
+  interface Session {
+    user: ExtendedUser;
+  }
+}
 
 export const {
   handlers: { GET, POST },
@@ -22,7 +33,7 @@ export const {
         user: {
           ...session.user,
           id: token.sub,
-          isOAuth: token.isOauth,
+          credits:token.credits
         },
       };
      },

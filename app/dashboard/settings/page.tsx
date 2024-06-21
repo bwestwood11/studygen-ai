@@ -8,12 +8,14 @@ import {
 import { CreditCardIcon, WalletIcon } from "lucide-react";
 import { numberFormatter } from "@/lib/utils";
 import { getDbCurrentUser } from "@/actions/auth.action";
+import { Zap } from "lucide-react";
+import PurchaseModalButton from "@/components/modal/purchase-modal-button";
 
 export default async function SettingsPage() {
   const user = await getDbCurrentUser({includes: {purchases: true}});
   if (!user) return null;
   return (
-    <div className="flex flex-col min-h-[100dvh]">
+    <div className="flex flex-col min-h-fullscreen">
       <main className="flex-1 bg-background px-4 md:px-6 py-8">
         <div className="max-w-3xl mx-auto grid gap-8">
           <Card className="bg-card rounded-lg shadow-md text-card-foreground">
@@ -49,11 +51,15 @@ export default async function SettingsPage() {
               </div>
             </CardContent>
           </Card>
-          <div className="bg-card rounded-lg shadow-md p-6 text-card-foreground">
+
+          <Card className="bg-card rounded-lg shadow-md p-6 text-card-foreground">
             <div className="flex items-center gap-4 mb-4">
               <WalletIcon className="h-6 w-6 text-gray-500 dark:text-gray-400" />
               <h3 className="text-lg font-medium">Credits</h3>
             </div>
+
+<div className=" space-y-2">
+
             <div className="grid gap-4">
               <div className="flex items-center justify-between">
                 <div className="text-sm font-medium">Total Credits</div>
@@ -63,7 +69,14 @@ export default async function SettingsPage() {
                 </div>
               </div>
             </div>
-          </div>
+            <PurchaseModalButton>
+              Purchase
+              <Zap size={20} className="fill-primary" />
+            </PurchaseModalButton>
+</div>
+
+          </Card>
+          
         </div>
       </main>
     </div>

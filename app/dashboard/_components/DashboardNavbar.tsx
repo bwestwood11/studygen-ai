@@ -6,7 +6,6 @@ import Image from "next/image";
 import LogoIcon from "@/components/icons/logo-icon";
 import { ModeToggle } from "@/components/ui/toggle-theme";
 import UserNavbar from "@/components/layout/user-navbar";
-import MaxWidthContainer from "./max-width-container";
 
 const Links = [
   {
@@ -27,11 +26,12 @@ const Links = [
   },
 ];
 
-export default async function Navbar() {
+
+
+export default async function DashboardNavbar() {
   return (
-<MaxWidthContainer>
-    <header className="flex h-nav w-full max-w-[1300px] mx-auto items-center justify-between px-4 md:px-6 lg:px-8">
-  <Link href="/" className="flex items-center" prefetch={false}>
+    <header className="flex h-nav w-full sticky bg-background top-0 mx-auto items-center justify-between px-4 md:px-6 lg:px-8 border-b">
+      <Link href="/" className="flex items-center" prefetch={false}>
         <span className="sr-only">StudyGen AI</span>
         <LogoIcon className="size-52" />
       </Link>
@@ -50,7 +50,8 @@ export default async function Navbar() {
 
       <div className="hidden lg:flex gap-6">
         <ModeToggle />
-        <UserNavbar />
+
+       <UserNavbar />
       </div>
 
       {/* Mobile Navbar */}
@@ -73,43 +74,22 @@ export default async function Navbar() {
               <span className="sr-only">StudyGen AI</span>
             </Link>
             <nav className="grid gap-4">
-              <Link
-                href="#"
-                className="text-sm font-medium transition-colors hover:text-gray-900 focus:text-gray-900 dark:hover:text-gray-50 dark:focus:text-gray-50"
-                prefetch={false}
-              >
-                Features
-              </Link>
-              <Link
-                href="#"
-                className="text-sm font-medium transition-colors hover:text-gray-900 focus:text-gray-900 dark:hover:text-gray-50 dark:focus:text-gray-50"
-                prefetch={false}
-              >
-                Pricing
-              </Link>
-              <Link
-                href="#"
-                className="text-sm font-medium transition-colors hover:text-gray-900 focus:text-gray-900 dark:hover:text-gray-50 dark:focus:text-gray-50"
-                prefetch={false}
-              >
-                About
-              </Link>
-              <Link
-                href="#"
-                className="text-sm font-medium transition-colors hover:text-gray-900 focus:text-gray-900 dark:hover:text-gray-50 dark:focus:text-gray-50"
-                prefetch={false}
-              >
-                Contact
-              </Link>
+            {Links.map((link, index) => (
+          <Link
+            key={link.name + index}
+            href={link.href}
+            className="text-sm font-medium transition-colors hover:text-primary focus:text-primary py-1 underline-animated"
+            prefetch={false}
+          >
+            {link.name}
+          </Link>
+        ))}
             </nav>
 
             <Button>Get Started</Button>
           </div>
         </SheetContent>
       </Sheet>
-      
-      
     </header>
-</MaxWidthContainer>
   );
 }
