@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 export async function POST(req: Request) {
-  console.log("Webhook received");
   const body = await req.text();
   const signature = headers().get("Stripe-Signature") as string;
 
@@ -24,7 +23,6 @@ export async function POST(req: Request) {
   const session = event.data.object as Stripe.Checkout.Session;
 
   if (event.type === "checkout.session.completed") {
-    console.log("Checkout session completed", session);
     const metadata = session.metadata;
     if (!metadata?.user || !metadata.creditsRequired || !session.amount_total) {
       return new NextResponse("Invalid metadata", { status: 400 });
@@ -47,7 +45,7 @@ export async function POST(req: Request) {
         },
       });
     } catch (error) {
-      console.log("Error updating user", error);
+      console.error("Error updating user", error);
       return new NextResponse("Error updating user", { status: 500 });
     }
   }

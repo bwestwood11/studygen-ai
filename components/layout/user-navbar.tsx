@@ -8,7 +8,7 @@ const UserNavbar = () => {
   const { data: session, status } = useSession();
   return (
     <div>
-      {!session && status === "unauthenticated" ? (
+      {status !== "authenticated" ? (
         <Button>Get Started</Button>
       ) : (
         <UserButton

@@ -44,7 +44,6 @@ const PurchaseCreditsModal = () => {
       return;
     }
     const response = await stripeCheckout(credits);
-    console.log(response);
     if (response.error || !response.url) {
       setError(
         response.error || "An error occurred while processing your payment"
@@ -68,6 +67,7 @@ const PurchaseCreditsModal = () => {
             value={[credits]}
             onValueChange={(v) => setCredits(v[0])}
             max={STRIPE_CONFIG.MAXIMUM_CREDITS}
+            min={STRIPE_CONFIG.MINIMUM_CREDITS}
             step={STRIPE_CONFIG.CREDITS_STEP}
           />
           <Button onClick={() => purchaseCredits()}>
@@ -76,7 +76,7 @@ const PurchaseCreditsModal = () => {
           <p className="text-center text-lg flex w-full justify-between">
             Total Cost:<span> ${(credits / 2) * 0.05}</span>
           </p>
-          {error && <p>{error}</p>}
+          {error && <p className="text-red-500">{error}</p>}
         </div>
       </DialogContent>
     </Dialog>

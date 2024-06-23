@@ -18,7 +18,7 @@ export async function getPurchaseHistory() {
 
     return purchaseHistory?.purchases || null;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 }

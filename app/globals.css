@@ -89,16 +89,34 @@
   }
 }
 
- .loader {
-    width: 10px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    animation: l5 1s infinite linear alternate;
+.loader {
+  width: 10px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l5 1s infinite linear alternate;
+}
+@keyframes l5 {
+  0% {
+    box-shadow: 20px 0 #ffffff, -20px 0 #d1d0d022;
+    background: #ffffff;
   }
-  @keyframes l5 {
-      0%  {box-shadow: 20px 0 #ffffff, -20px 0 #d1d0d022;background: #ffffff }
-      33% {box-shadow: 20px 0 #ffffff, -20px 0 #d1d0d022;background: #d1d0d022}
-      66% {box-shadow: 20px 0 #d1d0d022,-20px 0 #ffffff; background: #d1d0d022}
-      100%{box-shadow: 20px 0 #ffffff,-20px 0 #ffffff; background: #ffffff }
+  33% {
+    box-shadow: 20px 0 #ffffff, -20px 0 #d1d0d022;
+    background: #d1d0d022;
   }
+  66% {
+    box-shadow: 20px 0 #d1d0d022, -20px 0 #ffffff;
+    background: #d1d0d022;
+  }
+  100% {
+    box-shadow: 20px 0 #ffffff, -20px 0 #ffffff;
+    background: #ffffff;
+  }
+}
 
+@layer utilities {
+  .slim-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--foreground)) hsl(var(--background));
+  }
+}

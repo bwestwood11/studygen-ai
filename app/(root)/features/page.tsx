@@ -1,11 +1,7 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/PTk788Hdio2
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
-import Link from "next/link"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function NoteTake() {
   return (
@@ -20,8 +16,9 @@ export default function NoteTake() {
                     Effortless Study Notes with Gemini AI
                   </h1>
                   <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
-                    Unlock the power of AI-generated study notes from your PDF files and picture uploads. Streamline
-                    your learning process and boost your productivity.
+                    Unlock the power of AI-generated study notes from your PDF
+                    files and picture uploads. Streamline your learning process
+                    and boost your productivity.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -34,7 +31,7 @@ export default function NoteTake() {
                   </Link>
                 </div>
               </div>
-              <img
+              <Image
                 src="/placeholder.svg"
                 width="550"
                 height="550"
@@ -55,13 +52,13 @@ export default function NoteTake() {
                   Unlock the Power of AI-Generated Study Notes
                 </h2>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  Streamline your learning process and boost your productivity with Gemini AI&apos;s advanced note-taking
-                  capabilities.
+                  Streamline your learning process and boost your productivity
+                  with Gemini AI&apos;s advanced note-taking capabilities.
                 </p>
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-              <img
+              <Image
                 src="/placeholder.svg"
                 width="550"
                 height="310"
@@ -74,7 +71,8 @@ export default function NoteTake() {
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold">PDF to Notes</h3>
                       <p className="text-gray-500 dark:text-gray-400">
-                        Instantly convert your PDF files into comprehensive study notes, saving you time and effort.
+                        Instantly convert your PDF files into comprehensive
+                        study notes, saving you time and effort.
                       </p>
                     </div>
                   </li>
@@ -82,8 +80,8 @@ export default function NoteTake() {
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold">Image to Notes</h3>
                       <p className="text-gray-500 dark:text-gray-400">
-                        Capture key information from your handwritten notes or diagrams and transform them into digital
-                        study aids.
+                        Capture key information from your handwritten notes or
+                        diagrams and transform them into digital study aids.
                       </p>
                     </div>
                   </li>
@@ -91,8 +89,8 @@ export default function NoteTake() {
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold">Customizable Notes</h3>
                       <p className="text-gray-500 dark:text-gray-400">
-                        Tailor your study notes to your preferences, including formatting, highlighting, and
-                        organization.
+                        Tailor your study notes to your preferences, including
+                        formatting, highlighting, and organization.
                       </p>
                     </div>
                   </li>
@@ -108,8 +106,8 @@ export default function NoteTake() {
                 Boost Your Productivity with Gemini AI
               </h2>
               <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Streamline your learning process and focus on what matters most with Gemini AI&apos;s powerful note-taking
-                capabilities.
+                Streamline your learning process and focus on what matters most
+                with Gemini AI&apos;s powerful note-taking capabilities.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
@@ -134,8 +132,9 @@ export default function NoteTake() {
                   Integrate Gemini AI Seamlessly into Your Workflow
                 </h2>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed dark:text-gray-400">
-                  Gemini AI seamlessly integrates with your existing tools and platforms, allowing you to streamline
-                  your note-taking process and focus on learning.
+                  Gemini AI seamlessly integrates with your existing tools and
+                  platforms, allowing you to streamline your note-taking process
+                  and focus on learning.
                 </p>
                 <Link
                   href="#"
@@ -150,8 +149,9 @@ export default function NoteTake() {
                   Powerful AI
                 </div>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed dark:text-gray-400">
-                  Gemini AI leverages advanced natural language processing and machine learning algorithms to provide
-                  you with high-quality, personalized study notes.
+                  Gemini AI leverages advanced natural language processing and
+                  machine learning algorithms to provide you with high-quality,
+                  personalized study notes.
                 </p>
                 <Link
                   href="#"
@@ -171,17 +171,26 @@ export default function NoteTake() {
                 Streamline Your Learning with Gemini AI
               </h2>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Discover how Gemini AI can transform your study process and boost your productivity.
+                Discover how Gemini AI can transform your study process and
+                boost your productivity.
               </p>
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">
               <form className="flex gap-2">
-                <Input type="email" placeholder="Enter your email" className="max-w-lg flex-1" />
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="max-w-lg flex-1"
+                />
                 <Button type="submit">Try Gemini AI</Button>
               </form>
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 Sign up to get started with Gemini AI.
-                <Link href="#" className="underline underline-offset-2" prefetch={false}>
+                <Link
+                  href="#"
+                  className="underline underline-offset-2"
+                  prefetch={false}
+                >
                   Terms &amp; Conditions
                 </Link>
               </p>
@@ -189,8 +198,6 @@ export default function NoteTake() {
           </div>
         </section>
       </main>
-      
     </div>
-  )
+  );
 }
-
