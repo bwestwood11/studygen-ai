@@ -16,7 +16,6 @@ const ChatMessages = ({
   isPending: boolean;
 }) => {
   const session = useSession();
-
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -26,16 +25,13 @@ const ChatMessages = ({
     scrollToBottom();
   }, [messages]);
 
-  if (!session.data) {
-    return signIn();
-  }
   return (
     <div>
       <div className="flex-1 overflow-auto p-4">
         {messages.map((message, index) => (
           <ChatMessage
             message={message}
-            user={session.data?.user}
+            user={session.data?.user!}
             key={index}
           />
         ))}
