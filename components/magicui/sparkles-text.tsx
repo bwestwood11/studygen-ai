@@ -93,7 +93,7 @@ const SparklesText: React.FC<SparklesTextProps> = ({
           } else {
             return { ...star, lifespan: star.lifespan - 0.1 };
           }
-        }),
+        })
       );
     };
 
@@ -101,7 +101,7 @@ const SparklesText: React.FC<SparklesTextProps> = ({
     const interval = setInterval(updateStars, 400);
 
     return () => clearInterval(interval);
-  }, [colors.first, colors.second]);
+  }, [colors.first, colors.second, sparklesCount]);
 
   return (
     <div

@@ -1,13 +1,13 @@
-import Navbar from '@/components/layout/Navbar'
-import React from 'react'
+import Navbar from "@/components/layout/Navbar";
+import React from "react";
 
-const WebsiteLayout = ({children}: {children: React.ReactNode}) => {
+const WebsiteLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-        <Navbar />
-        {children}
+      <Navbar />
+      <main>{children}</main>
     </>
-  )
-}
+  );
+};
 
-export default WebsiteLayout
+export default WebsiteLayout;
