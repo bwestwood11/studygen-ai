@@ -8,7 +8,7 @@ import { Session } from "next-auth";
 /* This Action is used to get the current user's profile information. */
 export async function getCurrentUser(): Promise<null | Session["user"]> {
     const session = await auth();
-    if (session3 && session?.user) {
+    if (session && session?.user) {
       return session.user;
     }
     return null;
