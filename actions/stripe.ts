@@ -6,7 +6,6 @@ import { stripe } from "@/lib/stripe";
 export async function stripeCheckout(creditsRequired: number) {
   const user = await getCurrentUser();
   try {
-    console.log("user", user);
     if (!user || !user.email) {
       return {
         error: "You must be logged in to make a purchase",
@@ -36,7 +35,6 @@ export async function stripeCheckout(creditsRequired: number) {
         },
       ],
     });
-    console.log("stripe session url", stripeSession.url);
     if (!stripeSession.url)
       return {
         error: "An error occurred while processing your payment",

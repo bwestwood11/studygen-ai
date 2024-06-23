@@ -4,9 +4,8 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./prisma/prisma";
 import { getUserById } from "./lib/user";
 
-
 export type ExtendedUser = DefaultSession["user"] & {
-  credits:number
+  credits: number;
 };
 
 declare module "next-auth" {
@@ -27,20 +26,17 @@ export const {
   },
   callbacks: {
     async session({ session, token }) {
-
       return {
         ...session,
         user: {
           ...session.user,
           id: token.sub,
-          credits:token.credits
+          credits: token.credits,
         },
       };
-     },
+    },
     async jwt({ token }) {
-    
       if (!token.sub) return token;
-      console.log("token", token)
       const existingUser = await getUserById(token.sub);
 
       if (!existingUser) return token;
