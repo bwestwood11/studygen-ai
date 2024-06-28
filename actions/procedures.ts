@@ -11,7 +11,22 @@ export const authenticatedProcedure = createServerActionProcedure().handler(
       );
 
     return {
-      user: { id: session.id, email: session.email },
+      user: { id: session.id, email: session.email, credits:session.credits },
     };
   }
 );
+
+
+export const paidProcedure = createServerActionProcedure(authenticatedProcedure).handler(
+  async ({ctx}) => {
+    const credits = ctx.user.credits
+    if(credits < 1){
+      throw new ZSAError(
+        "INSUFFICIENT_CREDITS",
+        "You do not have enough balance"
+      );
+    }
+    
+    return ctx
+  }
+)

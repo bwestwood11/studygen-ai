@@ -23,3 +23,7 @@ export function HistoryParser(history:Message[]) {
     parts:[{text:h.message}]
   }))
 }
+
+export function sanitizeFileName(fileName:string) {
+  return encodeURIComponent(fileName.toLowerCase().trim().replace(/\s+/g, ' '));
+}
