@@ -11,7 +11,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
       <DashboardNavbar />
       <div className="flex">
         <Sidebar credits={session?.user.credits} />
-        <main className="flex-1 pt-5">
+        <main className="flex-1">
           <MaxWidthContainer>{children}</MaxWidthContainer>
         </main>
       </div>
