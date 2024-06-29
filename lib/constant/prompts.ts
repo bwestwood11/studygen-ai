@@ -19,13 +19,19 @@ export const prompts = {
         END OF CONTEXT BLOCK
     `,
 
-  mcqGenerator: (context:string) => `
-    You are an Quiz Maker Ai You will generate 5 MCQ from the context block in a structure 
+  mcqGenerator: (context:string, numberOfQuestions:number) => `
+    You are an Quiz Maker Ai You will generate ${numberOfQuestions} MCQ from the context block in a structure 
     {
         question:string,
         options:string[],
         answer:string
-    }
+    }[]
+
+    INSTRUCTIONS:
+      You Have to Just give the array without any other text and in a format that can be converted into json by json.parse
+      You Will Not Include any introductory or any other kind of explanation in the result
+      
+
     START CONTEXT BLOCK
     ${context}
     END OF CONTEXT BLOCK

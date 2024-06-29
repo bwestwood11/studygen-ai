@@ -15,6 +15,8 @@ import { sanitizeFileName } from "@/lib/utils";
 import { prisma } from "@/prisma/prisma";
 import { CREDITS_REQUIREMENT } from "@/lib/config";
 import { ZSAError } from "zsa";
+import { quizArraySchema } from "@/lib/schemas/quiz-schema";
+import { revalidatePath } from "next/cache";
 
 export const UploadPDF = paidProcedure
   .createServerAction()
@@ -100,14 +102,16 @@ export const searchGeneratedContent = authenticatedProcedure
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
-    console.log(text);
+
+   
     return {text: text, pages: results.matches.map((i) => i.metadata?.page)};
   });
 
 export const generateQuizAction = paidProcedure
   .createServerAction()
-  .input(z.object({ fileIncluded:z.string() }))
+  .input(z.object({ fileIncluded:z.string(), numberOfQuestions:z.number().min(5).max(10) }))
   .handler(async ({ ctx, input }) => {
+   try {
     const totalCreditsRequired = CREDITS_REQUIREMENT.GENERATE_MCQ
     if(ctx.user.credits < totalCreditsRequired){
       throw new ZSAError(
@@ -134,7 +138,7 @@ export const generateQuizAction = paidProcedure
       .join(" ------ NEXT_PAGE ------- ");
 
     console.log({ relatedText });
-    const prompt = prompts.mcqGenerator(relatedText);
+    const prompt = prompts.mcqGenerator(relatedText, input.numberOfQuestions);
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
     const result = await model.generateContent(prompt);
@@ -152,8 +156,17 @@ export const generateQuizAction = paidProcedure
       },   
     })
 
-    console.log(text);
-    return {text: text, pages: results.matches.map((i) => i.metadata?.page)};
+    const jsonResponse = JSON.parse(text)
+    console.log(jsonResponse)
+   const isValidated = quizArraySchema.safeParse(jsonResponse)
+   if(!isValidated.success){
+      throw new ZSAError("OUTPUT_PARSE_ERROR", "Response is not in correct format")
+    }
+    revalidatePath('/', 'layout')
+    return {quiz: isValidated.data, pages: results.matches.map((i) => i.metadata?.page)};
+   } catch (error) {
+      console.log(error)
+   } 
   });
 
 

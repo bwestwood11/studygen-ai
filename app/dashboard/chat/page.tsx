@@ -1,4 +1,5 @@
 "use client";
+
 import { GenerateContentAction } from "@/actions/gemini.action";
 import { usePurchaseModal } from "@/components/modal/purchase-credits";
 import { useRouter } from "next/navigation";
