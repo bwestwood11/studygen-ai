@@ -36,7 +36,7 @@ type TDocument = {
 
 export async function upsertDocument(chunks: TDocument[], namespaceId: string) {
   // Adjust to use namespaces if you're organizing data that way
-  const pineconeIndex = pinecone.Index("study-gen").namespace(namespaceId);
+  const pineconeIndex = pinecone.Index(process.env.PINECONE_INDEX_NAME!).namespace(namespaceId);
 
   const vectors: PineconeRecord<RecordMetadata>[] = chunks.map((chunk) => ({
     id: chunk.id,
