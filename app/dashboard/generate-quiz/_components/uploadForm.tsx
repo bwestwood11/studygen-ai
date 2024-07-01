@@ -43,6 +43,7 @@ const UploadForm = ({ initialFiles }: { initialFiles: Files[] }) => {
     },
     onError(args) {
       console.log(args);
+      
       alert("Error");
     },
   });
