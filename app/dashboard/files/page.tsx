@@ -6,11 +6,14 @@ import React from "react";
 import { useServerAction } from "zsa-react";
 
 const Page =  () => {
-  const {data} = useServerActionQuery(getUserFiles, {
+  const {data, refetch} = useServerActionQuery(getUserFiles, {
     queryKey:["getUserFiles"],
     input:undefined
   })
   const {data:deleteData, execute:deleteMutate, isPending} = useServerAction(deleteFile,{
+    onSuccess:()=>{
+      refetch()
+    },
     onError:(err)=>{
         console.log(err)
     }

@@ -20,10 +20,13 @@ import { Files } from "@prisma/client";
 import { useState } from "react";
 import { useServerAction } from "zsa-react";
 import GeneratedQuiz from "./quiz";
+import { toast } from "sonner";
 
 const UploadForm = ({ initialFiles }: { initialFiles: Files[] }) => {
   const [selectedFile, setSelectedFile] = useState<string | undefined>();
-  const [numberOfQuestions, setNumberOfQuestions] = useState<string | undefined>();
+  const [numberOfQuestions, setNumberOfQuestions] = useState<
+    string | undefined
+  >();
   const [error, setError] = useState("");
   const {
     isLoading,
@@ -42,9 +45,10 @@ const UploadForm = ({ initialFiles }: { initialFiles: Files[] }) => {
       setSelectedFile(data.data);
     },
     onError(args) {
-      console.log(args);
-      
-      alert("Error");
+      console.error(args.err.message);
+      toast.error("Something Went Wrong", {
+        description: args.err.message,
+      });
     },
   });
 
@@ -67,7 +71,10 @@ const UploadForm = ({ initialFiles }: { initialFiles: Files[] }) => {
     if (!selectedFile) {
       return setError("Please select a file");
     }
-    generateQuiz({ fileIncluded: selectedFile, numberOfQuestions: parseInt(numberOfQuestions || "5")});
+    generateQuiz({
+      fileIncluded: selectedFile,
+      numberOfQuestions: parseInt(numberOfQuestions || "5"),
+    });
   };
 
   const resetChat = () => {
@@ -106,7 +113,6 @@ const UploadForm = ({ initialFiles }: { initialFiles: Files[] }) => {
               id="pdf-upload"
               name="file"
               type="file"
-              accept=".pdf"
               className="block flex-1 w-full border-input text-foreground focus:ring-primary focus:border-primary sm:text-sm rounded-md"
             />
             <Button type="submit" className="" variant={"outline"}>
@@ -118,7 +124,6 @@ const UploadForm = ({ initialFiles }: { initialFiles: Files[] }) => {
 
       <p className="text-center text-muted-foreground py-2">or</p>
       <div className="flex flex-col gap-4">
-      
         <Select value={selectedFile} onValueChange={setSelectedFile}>
           <SelectTrigger>
             <SelectValue placeholder="Select An Existing File" />

@@ -13,6 +13,7 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.2.0",
     "@chatbuild/widget": "^0.1.0",
+    "@google-cloud/vision": "^4.3.0",
     "@google/generative-ai": "^0.13.0",
     "@langchain/google-genai": "^0.0.21",
     "@langchain/openai": "^0.2.0",
@@ -42,6 +43,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "sonner": "^1.5.0",
     "stripe": "^15.11.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",

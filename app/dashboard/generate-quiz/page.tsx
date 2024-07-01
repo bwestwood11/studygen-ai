@@ -11,10 +11,10 @@ export default async function Component() {
         <div className="space-y-4">
           <div className="text-center">
             <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              PDF Quiz Generator
+              Quiz Generator
             </h1>
             <p className="mt-3 text-muted-foreground">
-              Upload a PDF document and generate a multiple-choice quiz based on
+              Upload a PDF or an image and generate a multiple-choice quiz based on
               its content.
             </p>
           </div>

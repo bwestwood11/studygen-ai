@@ -6,6 +6,7 @@ import SmoothScrolling from "@/components/providers/smooth-scroll";
 import ModalProvider from "@/components/modal/modal-provider";
 import { SessionProvider } from "next-auth/react";
 import ReactQueryProvider from "@/components/providers/react-query";
+import { Toaster } from "@/components/ui/sonner"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider>
+        <Toaster />
           <ReactQueryProvider>
             <ThemeProvider
               attribute="class"

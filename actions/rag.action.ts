@@ -13,11 +13,15 @@ import { embedChunks, generatePrompt, upsertDocument } from "@/lib/gemini-pdf";
 import { prompts } from "@/lib/constant/prompts";
 import { generateUniqueFilename, sanitizeFileName } from "@/lib/utils";
 import { prisma } from "@/prisma/prisma";
-import { CREDITS_REQUIREMENT } from "@/lib/config";
+import { CREDITS_REQUIREMENT, MAX_FILES_PER_USER } from "@/lib/config";
 import { ZSAError } from "zsa";
 import { quizArraySchema } from "@/lib/schemas/quiz-schema";
 import { revalidatePath } from "next/cache";
-import { SUPPORTED_FILES, fileToChunks, imageToChunks } from "@/lib/file-loader";
+import {
+  SUPPORTED_FILES,
+  fileToChunks,
+  imageToChunks,
+} from "@/lib/file-loader";
 
 export const UploadPDF = paidProcedure
   .createServerAction()
@@ -31,16 +35,30 @@ export const UploadPDF = paidProcedure
   )
   .handler(async ({ ctx, input }) => {
     const file = input.file;
-    const base64 = await imageToChunks(file)
-    console.log(base64)
+    const files = await prisma.user.findFirst({
+      where: {
+        id:ctx.user.id
+      },
+      select:{
+        _count:true
+      }
+    })
 
-    if(!SUPPORTED_FILES.includes(file.type)){
+    const numberOfFiles = files?._count.files
+    if(!numberOfFiles || numberOfFiles >= MAX_FILES_PER_USER){
+      throw new ZSAError("PAYMENT_REQUIRED", "Max Number Of Files Reached. Delete Some files to go ahead")
+    }
+
+    if (!SUPPORTED_FILES.includes(file.type)) {
       throw new ZSAError("UNPROCESSABLE_CONTENT", "Invalid Format Type");
     }
-    
-    const {chunks,pages} = await fileToChunks(file)
 
-    const totalCreditsRequired = pages * CREDITS_REQUIREMENT.UPLOAD_PDF_PER_PAGE || 20;
+    const { chunks, pages } = await fileToChunks(file);
+    if (!chunks || chunks.length < 1 || !chunks[0].trim()) {
+      throw new ZSAError("UNPROCESSABLE_CONTENT", "We can't get content from the file try again with other file");
+    }
+    const totalCreditsRequired =
+      pages * CREDITS_REQUIREMENT.UPLOAD_PDF_PER_PAGE || 20;
     if (ctx.user.credits < totalCreditsRequired) {
       throw new ZSAError(
         "INSUFFICIENT_CREDITS",
@@ -48,7 +66,7 @@ export const UploadPDF = paidProcedure
       );
     }
 
-    const namespace = generateUniqueFilename(ctx?.user.id, file.name)
+    const namespace = generateUniqueFilename(ctx?.user.id, file.name);
     const embeddings = await embedChunks(chunks, namespace);
     await upsertDocument(embeddings, namespace);
 
@@ -69,7 +87,7 @@ export const UploadPDF = paidProcedure
         },
       },
     });
-    
+
     return namespace;
   });
 
@@ -127,7 +145,7 @@ export const generateQuizAction = paidProcedure
       const embeddings = await embedContent(
         "Questions and Topics That are unique and related to pdf"
       );
-
+      console.log(process.env.PINECONE_INDEX_NAME!);
       // NameSpace -> userid:pdf_name
       const pineconeIndex = pinecone
         .Index(process.env.PINECONE_INDEX_NAME!)
@@ -190,7 +208,6 @@ export const deleteFile = authenticatedProcedure
     })
   )
   .handler(async ({ ctx, input }) => {
-
     // check if file belongs to user
     const file = await prisma.files.findUnique({
       where: {
@@ -198,20 +215,20 @@ export const deleteFile = authenticatedProcedure
         userId: ctx.user.id,
       },
     });
-
+    console.log(file, "file");
     if (!file || file.userId !== ctx.user.id) {
       throw new ZSAError("NOT_FOUND", "File not found");
     }
 
     // Deleting From Both Database and pinecone
-    await deleteNameSpace(file.fileName);
+   const pineconeResponse = await deleteNameSpace(file.fileId);
+  console.log(pineconeResponse, "pineconeResponse");
     const res = await prisma.files.delete({
       where: {
         fileId: input.fileId,
       },
     });
-    console.log(res)
-
+    console.log(res);
     return { success: true };
   });
 

@@ -11,3 +11,4 @@ export const CREDITS_REQUIREMENT = {
     ANSWER_GENERAL_QUESTION: 1,
 };
   
+export const MAX_FILES_PER_USER = 10;
